@@ -1,0 +1,4 @@
+const C='arizona-v10';const F=['./','index.html','three.module.js','manifest.json','apple-touch-icon.png','jsm/controls/OrbitControls.js','jsm/postprocessing/EffectComposer.js','jsm/postprocessing/RenderPass.js','jsm/postprocessing/UnrealBloomPass.js','jsm/postprocessing/OutputPass.js','jsm/postprocessing/Pass.js','jsm/postprocessing/ShaderPass.js','jsm/postprocessing/MaskPass.js','jsm/shaders/CopyShader.js','jsm/shaders/LuminosityHighPassShader.js','jsm/shaders/OutputShader.js'];
+self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(F)));self.skipWaiting()});
+self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))));self.clients.claim()});
+self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)))});

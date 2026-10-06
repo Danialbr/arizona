@@ -8,6 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
 <style>
 :root{--ion:#0AC8B9;--gold:#C8AA6E;--ion2:#CDFAFA;--fg:#E9EEF5;--muted:#8693A8;--font:'Manrope',-apple-system,system-ui,sans-serif;color-scheme:dark}
@@ -651,6 +652,7 @@ requestAnimationFrame(loop);window.__go=go;window.__p=i=>personInfo(isNaN(+i)?ag
 drawCards();
 addEventListener('resize',()=>{C.aspect=innerWidth/innerHeight;C.updateProjectionMatrix();R.setSize(innerWidth,innerHeight);comp.setSize(innerWidth,innerHeight)});
 setTimeout(()=>{const l=document.getElementById('load');l.style.opacity=0;setTimeout(()=>l.remove(),800)},500);
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
 </script>
 </body>
 </html>
