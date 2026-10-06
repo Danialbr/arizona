@@ -8,6 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="favicon.png">
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
 <style>
@@ -56,12 +57,18 @@ canvas{display:block;touch-action:none}
 .tag.big{font-size:12px;padding:6px 10px;border-color:rgba(150,175,210,.3)}
 .empty{position:fixed;inset:auto 16px 50% 16px;text-align:center;color:var(--muted);font-size:14px}
 .load{position:fixed;inset:0;display:grid;place-items:center;background:#04060B;transition:opacity .8s;font:700 11px var(--font);letter-spacing:.3em;color:var(--muted)}
+.load{flex-direction:column}.lw{display:flex;flex-direction:column;align-items:center;gap:16px}
+.lm svg{width:84px;height:78px;display:block}.lword svg{width:230px;height:34px;display:block;color:#fff}.lsub{font:800 10px var(--font);letter-spacing:.62em;color:#C8AA6E;margin-left:.6em}
+.lm rect{transform-origin:center bottom;transform-box:fill-box;animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
+.lm .b1{animation-delay:.08s}.lm .b2{animation-delay:.16s}.lm .b3{animation-delay:.24s}.lm .b4{animation-delay:.36s}
+@keyframes rise{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.brand small{display:flex!important;align-items:center;gap:7px}.bm svg{width:15px;height:14px;display:block}
 </style>
 </head>
 <body>
-<div class="load" id="load">ARIZONA INDUSTRIES</div>
+<div class="load" id="load"><div class="lw"><div class="lm"><svg viewBox="8 8 104 96" xmlns="http://www.w3.org/2000/svg"><rect class="b0" x="14" y="83" width="16" height="17" fill="#fff" opacity="0.35"/><rect class="b1" x="33" y="66" width="16" height="34" fill="#fff" opacity="0.5"/><rect class="b2" x="52" y="49" width="16" height="51" fill="#fff" opacity="0.6499999999999999"/><rect class="b3" x="71" y="32" width="16" height="68" fill="#fff" opacity="0.7999999999999999"/><rect class="b4" x="90" y="15" width="16" height="85" fill="#C8AA6E" opacity="1"/></svg></div><div class="lword"><svg viewBox="-3 -3 322.0 46" xmlns="http://www.w3.org/2000/svg" fill="none"><path d="M0 40 L20 0 L40 40" transform="translate(0 0) scale(1.0)" fill="none" stroke="currentColor" stroke-width="5.0" stroke-linejoin="miter" stroke-linecap="butt"/><path d="M0 40 V0 H24 A10 10 0 0 1 24 20 H0 M16 20 L34 40" transform="translate(56.0 0) scale(1.0)" fill="none" stroke="currentColor" stroke-width="5.0" stroke-linejoin="miter" stroke-linecap="butt"/><path d="M0 0 V40" transform="translate(106.0 0) scale(1.0)" fill="none" stroke="currentColor" stroke-width="5.0" stroke-linejoin="miter" stroke-linecap="butt"/><path d="M0 0 H36 L0 40 H36" transform="translate(122.0 0) scale(1.0)" fill="none" stroke="currentColor" stroke-width="5.0" stroke-linejoin="miter" stroke-linecap="butt"/><path d="M18 0 A18 20 0 1 1 17.9 0 Z" transform="translate(174.0 0) scale(1.0)" fill="none" stroke="currentColor" stroke-width="5.0" stroke-linejoin="miter" stroke-linecap="butt"/><path d="M0 40 V0 L34 40 V0" transform="translate(226.0 0) scale(1.0)" fill="none" stroke="currentColor" stroke-width="5.0" stroke-linejoin="miter" stroke-linecap="butt"/><path d="M0 40 L20 0 L40 40" transform="translate(276.0 0) scale(1.0)" fill="none" stroke="currentColor" stroke-width="5.0" stroke-linejoin="miter" stroke-linecap="butt"/></svg></div><div class="lsub">INDUSTRIES</div></div></div>
 <div class="tags" id="tags"></div>
-<div class="hud"><div class="brand"><small>ARIZONA INDUSTRIES · SATURNO</small><b id="hTitle">La Colonia</b></div><a class="btn" href="/Orbit/">Abrir Orbit</a></div>
+<div class="hud"><div class="brand"><small><span class="bm"><svg viewBox="8 8 104 96" xmlns="http://www.w3.org/2000/svg"><rect class="b0" x="14" y="83" width="16" height="17" fill="#fff" opacity="0.35"/><rect class="b1" x="33" y="66" width="16" height="34" fill="#fff" opacity="0.5"/><rect class="b2" x="52" y="49" width="16" height="51" fill="#fff" opacity="0.6499999999999999"/><rect class="b3" x="71" y="32" width="16" height="68" fill="#fff" opacity="0.7999999999999999"/><rect class="b4" x="90" y="15" width="16" height="85" fill="#C8AA6E" opacity="1"/></svg></span>ARIZONA INDUSTRIES</small><b id="hTitle">La Colonia</b></div><a class="btn" href="/Orbit/">Abrir Orbit</a></div>
 <div class="panel" id="panel"></div>
 <div class="chips" id="chips"></div>
 <script type="importmap">{"imports":{"three":"./three.module.js"}}</script>
@@ -651,7 +658,7 @@ function loop(t){requestAnimationFrame(loop);const dt=clock.getDelta();
 requestAnimationFrame(loop);window.__go=go;window.__p=i=>personInfo(isNaN(+i)?agents().find(c=>c.userData.act.name===i):agents()[i]);
 drawCards();
 addEventListener('resize',()=>{C.aspect=innerWidth/innerHeight;C.updateProjectionMatrix();R.setSize(innerWidth,innerHeight);comp.setSize(innerWidth,innerHeight)});
-setTimeout(()=>{const l=document.getElementById('load');l.style.opacity=0;setTimeout(()=>l.remove(),800)},500);
+setTimeout(()=>{const l=document.getElementById('load');l.style.opacity=0;setTimeout(()=>l.remove(),800)},1600);
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
 </script>
 </body>
